@@ -100,8 +100,8 @@ class OS {
 	}
 	
 	function solve(){
-		$osilfile=tempnam(OS::$solver,'OS-');
-		$osrlfile=tempnam(OS::$solver,'OS-');
+		$osilfile=tempnam(OS::$tmp,'OS-');
+		$osrlfile=tempnam(OS::$tmp,'OS-');
 		if(self::$DEBUG){
 			$osilfile='osil.xml';
 			$osrlfile='osrl.xml';
