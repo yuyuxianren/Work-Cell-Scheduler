@@ -94,12 +94,9 @@ print_r($producti);
 	}
   print_r($abc);      
   */ 
-$osil=new SimpleXMLElement('<osil/>');
-$osil->addChild('instanceHeader');
-$osil->addChild('instanceData')->addChild('objectives')->addChild('obj')->addAttribute('numberOfObjCoef',0);
-$osil->asXML('test.xml');
-solve();
-print_r(solution());
+$test=new WebIS/OS;
+$test
+
 
 
 
