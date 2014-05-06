@@ -1,5 +1,6 @@
 <?php
 require_once 'Work-Cell-Scheduler/Web/tdd.php';
+require 'Work-Cell-Scheduler/WCS/os.php';
 
 $worker = array ();
 $cell = array ();
@@ -47,6 +48,11 @@ class Demand {
 		// return $product;
 	}
 }
+
+
+
+
+
 class TrainingMatrix {
 	public $worker = NULL;
 	public $cell = NULL;
@@ -70,14 +76,43 @@ class TrainingMatrix {
 
 //$a = new Demand ();
 
+$demandlist=array();
+for ($i=0;$i<10;$i++){
+	
+	
+	$tmp1=$product[array_rand($product)];
+	$tmp2=$cell[array_rand($cell)];
+	
+   while(array_key_exists("{$tmp1}_{$tmp2}",$demandlist)){
+		  $tmp1=$product[array_rand($product)];
+		  $tmp2=$cell[array_rand($cell)];
+	}
+	$c=new Demand($tmp1,$tmp2);
+	$demandlist["{$tmp1}_{$tmp2}"] = $c;
+	}
+	echo "Demandlist:";
+	print_r($demandlist);
+	
+
+
+
 $producti=array();
 for ($i=0;$i<20;$i++){
 	
 	$b= new TrainingMatrix();
-	$b->set($worker[array_rand($worker)],$cell[array_rand($cell)],rand(0,100)/100);
-	$producti["{$b->getworker()}_{$b->getcell()}"] = $b ;
+	$tmp1=$worker[array_rand($worker)];
+	$tmp2=$cell[array_rand($cell)];
+	
+	while(array_key_exists("{$tmp1}_{$tmp2}",$producti)){
+		$tmp1=$worker[array_rand($worker)];
+		$tmp2=$cell[array_rand($cell)];
+	}
+    $b->set($tmp1,$tmp2,rand(0,100)/100);
+	$producti["{$b->getworker()}_{$b->getcell()}"] = $b->getproductivity() ;
 }
+echo "TrainingList:";
 print_r($producti);
+
 
 
 
@@ -94,12 +129,75 @@ print_r($producti);
 	}
   print_r($abc);      
   */ 
-$osil=new SimpleXMLElement('<osil/>');
-$osil->addChild('instanceHeader');
-$osil->addChild('instanceData')->addChild('objectives')->addChild('obj')->addAttribute('numberOfObjCoef',0);
-$osil->asXML('test.xml');
-solve();
-print_r(solution());
+function getPro($w_c, array $trainingarray){
+	
+	if(array_key_exists($w_c,$trainingarray)==FALSE){
+		return false;
+	}
+	
+	$theProducti=$trainingarray[$w_c];//pay attention to the [] not () for array;
+	return $theProducti;
+}
+
+//$a=getPro("worker-3_cell-3",$producti);
+//echo $a;
+
+
+$cellhour=array();
+foreach($cell as $c){
+	$cellhour[$c]=0;
+}
+foreach($demandlist as $D){
+	$cellhour[$D->cell] += $D->hours;
+
+}
+echo "cell_hours:";
+print_r($cellhour);
+
+$OF=new WebIS\OS();
+$OF->solve();
+
+
+//$OF->getSolution();
+
+foreach($worker as $w){
+	foreach($cell as $c){
+
+		$OF->addVariable("{$w}_{$c}");
+		$OF->addObjCoef("{$w}_{$c}",1);
+		
+	}	
+}
+
+foreach($cellhour as $key => $hourvalue){
+	$OF->addConstraint(NULL,$hourvalue);
+	   foreach($worker as $w){
+	   	  $OF->addConstraintCoef("{$w}_{$key}", getPro("{$w}_{$key}", $producti));		   	
+	   }	
+}
+foreach($worker as $w){
+	$OF->addConstraint(8,NULL);
+	foreach($cell as $c){
+	 $OF->addConstraintCoef("{$w}_{$c}", 1);
+		
+	}
+	
+}
+
+print_r($OF);
+print_r($OF->solve());-
+//echo "\n";
+print_r($OF->getVariable("worker-3_cell-2"));
+//print_r($OF->getVariable("worker-4_cell-3"));
+//$OF->getSolution();
+
+	
+
+
+
+
+
+
 
 
 

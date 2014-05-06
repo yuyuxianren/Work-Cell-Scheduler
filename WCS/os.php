@@ -134,12 +134,12 @@ class OS {
 			return FALSE;
 		}
 
-		// save values to array
+		// save values to array                          THIS ONE!!!!!!!!!
 		$this->value=array();
 		$solution=$this->osrl->optimization->solution;
 		$variables=$this->osil->instanceData->variables;
 		foreach($solution->variables->values->var as $var){
-			$this->value[(string)$variables->var[(integer)$var['idx']]['name']]=(float)$var;
+			$this->value[(string)$variables->var[(integer)$var['idx']]['name']]=(float)$var;///THIS ONE!!
 			if(self::$DEBUG) print $var['idx'].": ";
 			if(self::$DEBUG) print (float)$var."\n";
 		}
