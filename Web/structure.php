@@ -155,10 +155,8 @@ echo "cell_hours:";
 print_r($cellhour);
 
 $OF=new WebIS\OS();
-$OF->solve();
+//$OF->solve();
 
-
-//$OF->getSolution();
 
 foreach($worker as $w){
 	foreach($cell as $c){
@@ -183,13 +181,28 @@ foreach($worker as $w){
 	}
 	
 }
-
-print_r($OF);
-print_r($OF->solve());-
+$OF->solve();
+//print_r($OF);
+//print_r($OF->solve());-
 //echo "\n";
-print_r($OF->getVariable("worker-3_cell-2"));
+echo "minimum hour: ";
+print_r($OF->getSolution());
+echo "\n";
+foreach ($worker as $w){
+	foreach ($cell as $c){
+		
+	   echo "{$w}_{$c}:";
+	   print_r($OF->getVariable("{$w}_{$c}"));
+	   echo "\n";
+		
+	}
+	
+	
+}
+
 //print_r($OF->getVariable("worker-4_cell-3"));
 //$OF->getSolution();
+
 
 	
 
