@@ -20,9 +20,9 @@ for($i = 0; $i < $numpro; $i ++) {
 	$product [] = "product-$i";
 }
 
-print_r ( $worker );
-print_r ( $cell );
-print_r ( $product );
+//print_r ( $worker );
+//print_r ( $cell );
+//print_r ( $product );
 
 // test
 
@@ -77,7 +77,7 @@ class TrainingMatrix {
 //$a = new Demand ();
 
 $demandlist=array();
-for ($i=0;$i<10;$i++){
+for ($i=0;$i<24;$i++){
 	
 	
 	$tmp1=$product[array_rand($product)];
@@ -90,8 +90,9 @@ for ($i=0;$i<10;$i++){
 	$c=new Demand($tmp1,$tmp2);
 	$demandlist["{$tmp1}_{$tmp2}"] = $c;
 	}
-	echo "Demandlist:";
-	print_r($demandlist);
+//echo "Demandlist:\n";
+//print_r($demandlist);
+
 	
 
 
@@ -110,8 +111,8 @@ for ($i=0;$i<20;$i++){
     $b->set($tmp1,$tmp2,rand(0,100)/100);
 	$producti["{$b->getworker()}_{$b->getcell()}"] = $b->getproductivity() ;
 }
-echo "TrainingList:";
-print_r($producti);
+//echo "TrainingList:";
+//print_r($producti);
 
 
 
@@ -151,8 +152,8 @@ foreach($demandlist as $D){
 	$cellhour[$D->cell] += $D->hours;
 
 }
-echo "cell_hours:";
-print_r($cellhour);
+//echo "cell_hours:";
+//print_r($cellhour);
 
 $OF=new WebIS\OS();
 //$OF->solve();
@@ -173,6 +174,8 @@ foreach($cellhour as $key => $hourvalue){
 	   	  $OF->addConstraintCoef("{$w}_{$key}", getPro("{$w}_{$key}", $producti));		   	
 	   }	
 }
+
+
 foreach($worker as $w){
 	$OF->addConstraint(8,NULL);
 	foreach($cell as $c){
@@ -184,11 +187,10 @@ foreach($worker as $w){
 $OF->solve();
 //print_r($OF);
 //print_r($OF->solve());-
+//echo "minimum hour: ";
+//print_r($OF->getSolution());
 //echo "\n";
-echo "minimum hour: ";
-print_r($OF->getSolution());
-echo "\n";
-foreach ($worker as $w){
+/*foreach ($worker as $w){
 	foreach ($cell as $c){
 		
 	   echo "{$w}_{$c}:";
@@ -199,6 +201,8 @@ foreach ($worker as $w){
 	
 	
 }
+*/
+
 
 //print_r($OF->getVariable("worker-4_cell-3"));
 //$OF->getSolution();

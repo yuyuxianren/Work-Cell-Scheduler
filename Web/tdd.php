@@ -1,5 +1,5 @@
 <?php
-echo "OSBasics\n";
+//echo "OSBasics\n";
 
 // Problem 1:
 
@@ -154,5 +154,5 @@ solve();
 assertEquals(0.0,solution());
 
 
-echo "Done.";
+//echo "Done.";
 ?>
