@@ -11,10 +11,7 @@
 <font style="font-family:Cursive;color:green" size="5">Productivity</font>
 </strong>
 <table border = 1>
-<tr>
-<td>solution</td>
 
-</tr>
 
 <?php 
    foreach ($worker as $w){

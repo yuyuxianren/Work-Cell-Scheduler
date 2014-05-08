@@ -26,7 +26,7 @@ for($i = 0; $i < $numpro; $i ++) {
 
 // test
 
-$testworker = $worker [array_rand ( $worker )];
+/*$testworker = $worker [array_rand ( $worker )];
 assertContains ( $testworker, array (
 		"worker-1",
 		"worker-2",
@@ -34,6 +34,7 @@ assertContains ( $testworker, array (
 		"worker-4",
 		"worker-0" 
 ) );
+*/
 
 //
 class Demand {
@@ -91,7 +92,7 @@ for ($i=0;$i<24;$i++){
 	$demandlist["{$tmp1}_{$tmp2}"] = $c;
 	}
 //echo "Demandlist:\n";
-//print_r($demandlist);
+print_r($demandlist);
 
 	
 
@@ -111,8 +112,8 @@ for ($i=0;$i<20;$i++){
     $b->set($tmp1,$tmp2,rand(0,100)/100);
 	$producti["{$b->getworker()}_{$b->getcell()}"] = $b->getproductivity() ;
 }
-//echo "TrainingList:";
-//print_r($producti);
+echo "TrainingList:";
+print_r($producti);
 
 
 
