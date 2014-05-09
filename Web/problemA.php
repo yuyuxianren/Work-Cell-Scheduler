@@ -104,31 +104,35 @@ $OF->solve();
 print_r($OF->getSolution());
 
 //display
+//$tmp = 0;
 echo "<table border='1'><tr><td>\n";
 foreach($supplier as $S){
 	echo "<th>$S</th>";
 }
 foreach($department as $D){
-	echo "<tr><th>${w}: ";
-	foreach($cell as $c){
-		$var="${w}_${c}";
-		$val=$os->getVariable($var);
-		$t=$training->get($w,$c);
-		echo "<td>$val $t <strong>".$val*$t."</strong></td>";
+	echo "<tr><th>{$D}: ";
+	foreach($supplier as $S){
+		$var="${S}_${D}";
+		$var=$OF->getVariable($var);
+		echo "<td>$var</td>";
 }
 echo "<tr>\n";
 }
-echo "<tr><th>Total</th>";
-foreach($celltotal as $ct){
-	echo "<td>$ct</td>";
+/*echo "<tr><th>Total</th>";
+foreach($supplier as $S){
+	foreach ($department as $D){		
+	$tmp += $OF->getVariable("{$S}_{$D}");
+	}
+	echo "<td>$tmp</td>";
 }
 echo "</tr>";
+*/
 
 echo "\n</table>";
 
-
-// Done
 echo "\n</body></html>\n";
+
+//print_r($OF);
 
 
 
