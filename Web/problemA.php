@@ -103,6 +103,33 @@ foreach ($demand as $key => $D){
 $OF->solve();
 print_r($OF->getSolution());
 
+//display
+echo "<table border='1'><tr><td>\n";
+foreach($supplier as $S){
+	echo "<th>$S</th>";
+}
+foreach($department as $D){
+	echo "<tr><th>${w}: ";
+	foreach($cell as $c){
+		$var="${w}_${c}";
+		$val=$os->getVariable($var);
+		$t=$training->get($w,$c);
+		echo "<td>$val $t <strong>".$val*$t."</strong></td>";
+}
+echo "<tr>\n";
+}
+echo "<tr><th>Total</th>";
+foreach($celltotal as $ct){
+	echo "<td>$ct</td>";
+}
+echo "</tr>";
+
+echo "\n</table>";
+
+
+// Done
+echo "\n</body></html>\n";
+
 
 
 
