@@ -102,11 +102,14 @@ foreach ($demand as $key => $D){
 // solve problem
 
 $OF->solve();
+
 if(($OF->getSolution()==NULL))
 	echo "this total number of demand larger than capacity total, you cannot get the solution.";
 else
 {echo "The solution:\n";
 print_r($OF->getSolution());}
+
+
 
 //display
 //$tmp = 0;
