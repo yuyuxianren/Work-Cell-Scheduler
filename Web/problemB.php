@@ -6,10 +6,10 @@ $department= array();
 $supplier=array();
 
 
-$numberS=rand(3,5);
-$numberD=rand(2,4);
+$supplierNum=rand(3,5);
+$departmentNum=rand(2,4);
 
-for($i=1;$i<=$numberD;$i++){
+for($i=1;$i<=$departmentNum;$i++){
 
 	$department[]="department-$i";
 
@@ -17,7 +17,7 @@ for($i=1;$i<=$numberD;$i++){
 //echo "department:\n";
 //print_r($department);
 
-for($i=1;$i<=$numberS;$i++){
+for($i=1;$i<=$supplierNum;$i++){
 
 	$supplier[]="supplier-$i";
 

@@ -6,10 +6,10 @@ $department= array();
 $supplier=array();
 
 
-$numberS=3;
-$numberD=3;
+$supplierNum=3;
+$departmentNum=3;
 
-for($i=1;$i<=$numberD;$i++){
+for($i=1;$i<=$departmentNum;$i++){
 
 	$department[]="department-$i";
 
@@ -17,7 +17,7 @@ for($i=1;$i<=$numberD;$i++){
 echo "department:\n";
 print_r($department);
 
-for($i=1;$i<=$numberS;$i++){
+for($i=1;$i<=$supplierNum;$i++){
 
 	$supplier[]="supplier-$i";
 
