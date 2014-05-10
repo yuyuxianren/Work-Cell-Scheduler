@@ -121,7 +121,57 @@ Class Problemdata{
   	 	
   }
   
-  function displayProblem(){}
+  function displayProblem(){
+  	    
+
+  	    $capacity=$this->capacity;
+  	    echo "Supplier Capacity:\n";
+  		echo "<table border='1'>\n";
+  		foreach($this->supplier as $S){
+  			echo "<tr><th>$S</th>";
+  			echo "<td>$capacity[$S]</td>";
+  		}
+  		echo "</table>\n";
+  		echo "\n";
+  		
+  		echo "Department Demand:\n";
+  		$demand=$this->demand;
+  		echo "<table border='1'>\n";
+  		foreach($this->department as $D){
+  			echo "<tr><th>$D</th>";
+  			echo"<td>$demand[$D]</td>";	
+  		}
+  		echo "</table>\n";
+  		
+  		echo "Department Profit:\n";
+  		$profit=$this->profit;
+  		echo "<table border='1'>\n";
+  		foreach($this->department as $D){
+  			echo "<tr><th>$D</th>";
+  			echo"<td>$profit[$D]</td>";
+  		}
+  			echo "</table>\n";
+        
+  	   echo "Distance:\n";
+  		$distance=$this->distance;
+  		echo "<table border='1'><tr><td>\n";
+  		foreach($this->supplier as $S){
+  			echo "<th>$S</th>";
+  			}
+  	    foreach($this->department as $D){
+  	    	echo "<tr><th>$D</th>";
+  	    	foreach($this->supplier as $S){
+  	    		$var = $distance["{$S}_{$D}"]->distance;
+  	    		echo "<td>$var</td>";
+  	    		
+  	    	}
+  	    	
+  	    }
+  	    echo "</table>\n";
+  
+  	}
+  	 
+  
   function displaySolution(){
   	
   	if(($this->of->getSolution()==NULL))
@@ -190,6 +240,8 @@ $test->loadCost();
 $test->Calculate();
 	
 $test->Solve();
+
+$test->displayProblem();
 	
 $test->displaySolution();
 
